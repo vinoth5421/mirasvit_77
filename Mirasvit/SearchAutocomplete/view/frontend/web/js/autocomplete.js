@@ -415,7 +415,8 @@ define([
 
             this.$placeholder()
                 .css('top', this.$input.outerHeight() - 1 + top)
-                .css('left', left)
+                .css('left', 'auto')
+                .css('right', '0')
                 .css('width', this.$input.outerWidth());
         }
     };

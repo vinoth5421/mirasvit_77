@@ -154,7 +154,7 @@ class Mapper
         $emulation = ObjectManager::getInstance()->get('\Magento\Store\Model\App\Emulation');
         $emulation->startEnvironmentEmulation($storeId, 'frontend', true);
 
-        $image = $this->imageHelper->init($product, 'upsell_products_list')
+        $image = $this->imageHelper->init($product, 'sendfriend_small_image')
             ->setImageFile($product->getImage())
             ->getUrl();
 

@@ -79,20 +79,35 @@
         <div data-bind="html: rating"></div>
         <!-- /ko -->
 
+
         <!-- ko if: stock_status -->
         <span class="stock_status" data-bind="text: stock_status, processStockStatus"></span>
         <!-- /ko -->
 
-        <div class="to-cart" data-bind="visible: cart.visible">
-            <a class="action primary mst__add_to_cart" data-bind="attr: { _href: cart.url }">
-                <span data-bind="html: cart.label"></span>
-            </a>
+        <div class="addtocart-price">
+
+            <div class="store">
+                <div data-bind="html: price" class="price"></div>
+            </div>
+
+            <div class="unit-of-sale">
+                <div>
+                    <span>for</span>
+                    <span data-bind="text: unitofsale"></span>
+                </div>
+            </div>
+
+            <div class="to-cart" data-bind="visible: cart.visible">
+                <a class="action primary mst__add_to_cart" data-bind="attr: { _href: cart.url }">
+                    <span data-bind="html: cart.label"></span>
+                </a>
+            </div>
+
         </div>
+
     </div>
 
-    <div class="store">
-        <div data-bind="html: price" class="price"></div>
-    </div>
+    
 </script>
 
 <script id="magento_catalog_categoryproduct" type="text/x-custom-template">

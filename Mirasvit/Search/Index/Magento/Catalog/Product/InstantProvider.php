@@ -125,10 +125,16 @@ class InstantProvider extends AbstractInstantProvider
             $price = array_values($price)[0];
         }
 
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $unitofsaleHelper = $objectManager->get('\Expedux\Checkout\Helper\Unitofsale');
+        $unitOfSale = $unitofsaleHelper->getUnitOfSale($product->getId());
+
         return [
             'name'          => $this->mapper->getProductName($product),
             'url'           => $this->mapper->getProductUrl($product, $storeId),
             'sku'           => $this->mapper->getProductSku($product),
+            'addsku'        => $product->getSku(),
+            'unitofsale'    => $unitOfSale,
             'description'   => $this->mapper->getDescription($product),
             'image'         => $this->mapper->getProductImage($product, $storeId),
             'price'         => $price,
