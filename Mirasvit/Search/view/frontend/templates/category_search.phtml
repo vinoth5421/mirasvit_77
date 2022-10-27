@@ -1,0 +1,28 @@
+<?php
+/** @var \Mirasvit\Search\Block\CategorySearch $block */
+	$config = $block->getJsConfig();
+	if ($config['isActive'] && $block->getIsVisibleCategorySearch()) :
+?>
+	<div class="mst_categorySearch">
+		<input type="text" id="mst_categorySearch" placeholder="<?=__('Search across %1 products', $block->getCollectionSize())?>" value="<?= $block->getQueryText()?>" />
+		<span class="mst_categorySearch_searchIcon"><i class="fa fa-search"></i></span>
+		<span class="mst_categorySearch_totals"><?=__('found %1 products', $block->getCollectionSize())?></span>
+		<div class="mst_categorySearchLoader">
+	        <div class="spinner-item spinner-item-1"></div>
+	        <div class="spinner-item spinner-item-2"></div>
+	        <div class="spinner-item spinner-item-3"></div>
+	        <div class="spinner-item spinner-item-4"></div>
+		</div>
+	</div>
+	<script>
+	    require([
+	            'jquery',
+	            'Mirasvit_Search/js/categorySearch',
+	        ], function ($, categorySearch) {
+	            $(document).ready(function () {
+                    new categorySearch($('#mst_categorySearch')).init(<?=\Zend_Json::encode($config)?>);
+                });
+	        }
+	    );
+	</script>
+<?php endif;?>

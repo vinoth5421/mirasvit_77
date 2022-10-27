@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mst_misspell_index" resource="default" engine="innodb" comment="Misspell Index">
+    <column xsi:type="int" name="index_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Index Id"/>
+    <column xsi:type="varchar" name="keyword" nullable="false" length="255" comment="Keyword"/>
+    <column xsi:type="varchar" name="trigram" nullable="false" length="255" comment="Trigram"/>
+    <column xsi:type="decimal" name="frequency" scale="4" precision="12" unsigned="false" nullable="false" default="0" comment="Frequency"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="index_id"/>
+    </constraint>
+    <index referenceId="MST_MISSPELL_INDEX_TRIGRAM" indexType="fulltext">
+      <column name="trigram"/>
+    </index>
+  </table>
+  <table name="mst_misspell_suggest" resource="default" engine="innodb" comment="Misspell Suggest">
+    <column xsi:type="int" name="suggest_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Suggest Id"/>
+    <column xsi:type="varchar" name="query" nullable="false" length="255" comment="Query"/>
+    <column xsi:type="varchar" name="suggest" nullable="false" length="255" comment="Suggest"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="suggest_id"/>
+    </constraint>
+  </table>
+</schema>

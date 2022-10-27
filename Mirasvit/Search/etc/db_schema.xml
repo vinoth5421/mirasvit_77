@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mst_search_index" resource="default" engine="innodb" comment="Search Index">
+    <column xsi:type="int" name="index_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Index Id"/>
+    <column xsi:type="varchar" name="identifier" nullable="false" length="255" onCreate="migrateDataFrom(code)"/>
+    <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+    <column xsi:type="int" name="position" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Position"/>
+    <column xsi:type="text" name="attributes_serialized" nullable="true" comment="Attributes"/>
+    <column xsi:type="text" name="properties_serialized" nullable="true" comment="Properties"/>
+    <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Status"/>
+    <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+    <column name="code" disabled="true"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="index_id"/>
+    </constraint>
+  </table>
+  <table name="mst_search_synonym" resource="default" engine="innodb" comment="Synonyms" disabled="true">
+    <column xsi:type="int" name="synonym_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Synonym Id"/>
+    <column xsi:type="varchar" name="term" nullable="false" length="255" comment="Term"/>
+    <column xsi:type="varchar" name="synonyms" nullable="false" length="255" comment="Synonyms"/>
+    <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Store Id"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="synonym_id"/>
+    </constraint>
+    <index referenceId="MST_SEARCH_SYNONYM_TERM" indexType="btree">
+      <column name="term"/>
+    </index>
+  </table>
+  <table name="mst_search_stopword" resource="default" engine="innodb" comment="Stopwords">
+    <column xsi:type="int" name="stopword_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Stopword Id"/>
+    <column xsi:type="varchar" name="term" nullable="false" length="255" comment="Stopword"/>
+    <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Store Id"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="stopword_id"/>
+    </constraint>
+    <index referenceId="MST_SEARCH_STOPWORD_TERM" indexType="btree">
+      <column name="term"/>
+    </index>
+  </table>
+  <table name="catalog_product_entity" resource="default">
+    <column xsi:type="int" name="mst_search_weight" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Search Weight"/>
+  </table>
+  <table name="mst_search_score_rule" resource="default" engine="innodb" comment="Score Rules">
+    <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="true" comment="rule_id"/>
+    <column xsi:type="varchar" name="title" nullable="false" length="255" comment="title"/>
+    <column xsi:type="varchar" name="store_ids" nullable="false" length="255" comment="store_ids"/>
+    <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="status"/>
+    <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="is_active"/>
+    <column xsi:type="date" name="active_from" comment="active_from"/>
+    <column xsi:type="date" name="active_to" comment="active_to"/>
+    <column xsi:type="text" name="conditions_serialized" nullable="true" comment="conditions_serialized"/>
+    <column xsi:type="text" name="post_conditions_serialized" nullable="true" comment="post_conditions_serialized"/>
+    <column xsi:type="varchar" name="score_factor" nullable="false" length="255" default="0" comment="score_factor"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="rule_id"/>
+    </constraint>
+    <index referenceId="IDX_B0D1227DB300662A1C0534B1A532B9EB" indexType="btree">
+      <column name="store_ids"/>
+      <column name="is_active"/>
+      <column name="active_from"/>
+      <column name="active_to"/>
+    </index>
+  </table>
+  <table name="mst_search_score_rule_index" resource="default" engine="innodb" comment="Score Rules Index">
+    <column xsi:type="int" name="rule_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Rule ID"/>
+    <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Store ID"/>
+    <column xsi:type="int" name="product_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Product ID"/>
+    <column xsi:type="varchar" name="score_factor" nullable="false" length="255" default="0" comment="Score Factor"/>
+  </table>
+</schema>

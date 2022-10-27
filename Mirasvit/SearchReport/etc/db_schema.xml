@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mst_search_report_log" resource="default" engine="innodb" comment="mst_search_report_log">
+    <column xsi:type="int" name="log_id" padding="11" unsigned="false" nullable="false" identity="true" comment="log_id"/>
+    <column xsi:type="varchar" name="query" nullable="true" length="255" comment="query"/>
+    <column xsi:type="varchar" name="misspell_query" nullable="true" length="255" comment="misspell_query"/>
+    <column xsi:type="varchar" name="fallback_query" nullable="true" length="255" comment="fallback_query"/>
+    <column xsi:type="int" name="results" padding="11" unsigned="false" nullable="true" identity="false" comment="results"/>
+    <column xsi:type="varchar" name="ip" nullable="true" length="255" comment="ip"/>
+    <column xsi:type="varchar" name="session" nullable="true" length="255" comment="session"/>
+    <column xsi:type="varchar" name="country" nullable="true" length="3" comment="country"/>
+    <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false" comment="customer_id"/>
+    <column xsi:type="int" name="order_item_id" padding="11" unsigned="false" nullable="true" identity="false" comment="order_item_id"/>
+    <column xsi:type="int" name="clicks" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="clicks"/>
+    <column xsi:type="varchar" name="source" nullable="false" length="255" comment="source"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="created_at"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="log_id"/>
+    </constraint>
+    <index referenceId="MST_SEARCH_REPORT_LOG_LOG_ID" indexType="btree">
+      <column name="log_id"/>
+    </index>
+  </table>
+</schema>

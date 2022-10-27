@@ -1,0 +1,300 @@
+.mst-quickDataBar {
+    @bg:           #373330;
+    @height:       70px;
+
+    background:    @bg;
+    height:        @height;
+    width:         100%;
+    border-radius: 3px;
+    overflow:      hidden;
+    margin-bottom: 3rem;
+    color:         #ffffff;
+
+    .mst-quickDataBar-container {
+        display:     none;
+        align-items: center;
+        height:      @height;
+
+        > div {
+            border-right: 1px solid rgba(0, 0, 0, 0.5);
+            height:       100%;
+            position:     relative;
+            flex-grow:    1;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        .mst-quickDataBar__dateRange {
+            display:     flex;
+            align-items: center;
+            flex-grow:   0;
+            padding:     10px 15px;
+
+            select {
+                background: @bg;
+                border:     none;
+            }
+        }
+    }
+
+    &._ready {
+        .mst-quickDataBar-container {
+            display: flex;
+        }
+    }
+}
+
+.mst-quickDataBar__dataBlock {
+    flex-grow: 1;
+    padding:   10px 15px;
+
+    &._loading {
+        .dataBlockValue {
+            height:        20px;
+            width:         80px;
+            background:    #ffffff;
+            border-radius: 3px;
+            opacity:       0.2;
+            color:         transparent;
+        }
+
+        .dataBlockSparkline {
+            opacity: 0.3;
+        }
+    }
+
+    .dataBlockLabel {
+        margin-bottom: 10px;
+        opacity:       0.8;
+        position:      relative;
+        z-index:       3;
+    }
+
+    .dataBlockValue {
+        font-weight: 600;
+        font-size:   110%;
+        position:    relative;
+        z-index:     3;
+    }
+
+    .dataBlockSparkline {
+        height:   50px;
+        width:    224px;
+        position: absolute;
+        right:    0;
+        bottom:   0;
+        opacity:  0.8;
+        z-index:  2;
+    }
+
+    &._sparklineBlock {
+        cursor: pointer;
+
+        &:hover {
+            background: #222120;
+        }
+    }
+
+    &._multiScalarData {
+        .dataBlockValues {
+            display:     flex;
+            align-items: center;
+            flex-wrap:   wrap;
+
+            .dataBlockValue {
+                display:      flex;
+                margin-right: 15px;
+                align-items:  center;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                .valueLabel {
+                    font-size:    14px;
+                    font-weight:  normal;
+                    opacity:      0.8;
+                    margin-right: 5px;
+                }
+
+                .value {
+
+                }
+            }
+        }
+    }
+
+    &._multiCellData {
+        .dataBlockValues {
+            display:     flex;
+            align-items: center;
+            flex-wrap:   wrap;
+
+            .dataBlockValue {
+                display:      flex;
+                margin-right: 15px;
+                align-items:  center;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                .valueLabel {
+                    font-size:    14px;
+                    font-weight:  normal;
+                    opacity:      0.8;
+                    margin-right: 5px;
+                }
+
+                a.value {
+                    color:         #ffffff;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+                    &:hover {
+                        text-decoration:     none;
+                        border-bottom-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+
+    &._multiRowData {
+        .progress-color(@to) {
+            background: @to;
+        }
+
+        .dataBlockRows {
+            display:        flex;
+            align-items:    center;
+            flex-wrap:      nowrap;
+            border-bottom:  1px solid rgba(0, 0, 0, 0.5);
+            padding-bottom: 5px;
+            margin-bottom:  5px;
+
+            &:last-child {
+                border-bottom:  0;
+                padding-bottom: 0;
+                margin-bottom:  0;
+            }
+
+            .dataBlockRow {
+                flex-grow: 1;
+                cursor:    pointer;
+
+                a::after {
+                    content: " ";
+                    display: block;
+                    height:  0;
+                    clear:   both;
+                }
+
+                .valueLabel {
+                    color:         #ffffff;
+                    opacity:       0.8;
+                    white-space:   nowrap;
+                    overflow:      hidden;
+                    text-overflow: ellipsis;
+                }
+
+                a {
+                    text-decoration: none;
+                    display:         flex;
+                    flex-direction:  column;
+                    border-radius:   3px;
+                    padding:         0 5px;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.1);
+                    }
+                }
+
+                .dataBlockRowCell {
+                    width:       100%;
+                    display:     flex;
+                    flex-grow:   1;
+                    align-items: center;
+
+                    .progress-bar {
+                        display:   inline-block;
+                        height:    3px;
+                        float:     left;
+                        flex-grow: 1;
+
+                        &.cell-color0, &.cell-lime {
+                            .progress-color(#68cf70);
+                        }
+
+                        &.cell-color1, &.cell-green {
+                            .progress-color(#47cd4a);
+                        }
+
+                        &.cell-color2, &.cell-teal {
+                            .progress-color(#3298b1);
+                        }
+
+                        &.cell-color3, &.cell-olive {
+                            .progress-color(#668121);
+                        }
+
+                        .cell-color4, &.cell-purple {
+                            .progress-color(#c007bf);
+                        }
+
+                        &.cell-color5, &.cell-yellow {
+                            .progress-color(#f0b700);
+                        }
+
+                        &.cell-color6, &.cell-maroon {
+                            .progress-color(#af5959);
+                        }
+
+                        &.cell-color7, &.cell-silver {
+                            .progress-color(#8b8b8b);
+                        }
+
+                        &.cell-color8, &.cell-grey {
+                            .progress-color(#424242);
+                        }
+
+                        &.cell-color9, &.cell-orange {
+                            .progress-color(#ff8c00);
+                        }
+
+                        &.cell-color10, &.cell-red {
+                            .progress-color(#ff2525);
+                        }
+
+                        &.cell-aqua {
+                            .progress-color(#2ec5b9);
+                        }
+
+                        &.cell-navy {
+                            .progress-color(#4c7eb4);
+                        }
+
+                        &.cell-black {
+                            .progress-color(darken(#000000, 20%));
+                        }
+
+                        &.cell-blue {
+                            .progress-color(#5e6bff);
+                        }
+
+                        &.cell-fuchsia {
+                            .progress-color(#d55bd5);
+                        }
+                    }
+
+                    .value {
+                        color:       #ffffff;
+                        margin-left: 8px;
+                        flex-shrink: 0;
+                    }
+                }
+            }
+        }
+    }
+}

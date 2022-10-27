@@ -1,0 +1,35 @@
+<?php
+/** @var \Mirasvit\SearchAutocomplete\Block\Injection $block */
+$sidebarPosition = $block->getLayeredNavigationPosition();
+?>
+
+<div class="mstInPage__sidebar" data-bind="visible: $parent.activeIndex() == 'magento_catalog_product'">
+    <?php if ($sidebarPosition == 'filters_sidebar') : ?>
+        <div class="mstInPage__bucketState" data-bind="foreach: { data: activeBuckets(), as: 'activeBucket' }">
+            <div class="mstInPage__bucketItemList listApplied" data-bind="foreach: { data: activeBucket.buckets, as: 'item' }">
+                <!-- ko if: item.isActive -->
+                <strong data-bind="text: activeBucket.label"></strong>
+                <div class="mstInPage__bucketItem itemApplied" data-bind="{ click: item.select}">
+                    <span data-bind="text: item.label"></span>
+                    <div class="mstInPage__close"></div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    <?php endif ?>
+
+    <div class="mstInPage__bucketList">
+        <div data-bind="foreach: { data: buckets(), as: 'bucket' }">
+            <div class="mstInPage__bucket">
+                <div class="mstInPage__bucketLabel" data-bind="text: bucket.label"></div>
+                <div class="mstInPage__bucketItemList" data-bind="foreach: { data: bucket.buckets, as: 'item' }">
+                    <div class="mstInPage__bucketItem" data-bind="{ click: item.select, css: { _active: item.isActive } }">
+                        <input type="checkbox">
+                        <span data-bind="text: item.label"></span>
+                        <i data-bind="text: item.count"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

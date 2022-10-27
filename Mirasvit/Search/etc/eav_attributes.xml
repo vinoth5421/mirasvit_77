@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Eav:etc/eav_attributes.xsd">
+    <entity type="catalog_product">
+        <attribute code="search">
+            <field code="is_searchable" locked="true" />
+            <field code="used_for_sort_by" locked="true" />
+            <field code="is_used_in_grid" locked="true" />
+            <field code="is_visible_in_grid" locked="true" />
+            <field code="is_filterable_in_grid" locked="true" />
+            <field code="is_filterable" locked="true" />
+            <field code="is_filterable_in_search" locked="false" />
+        </attribute>
+    </entity>
+</config>

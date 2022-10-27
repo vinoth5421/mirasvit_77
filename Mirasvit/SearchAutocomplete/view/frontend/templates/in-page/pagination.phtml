@@ -1,0 +1,11 @@
+<?php
+/** @var \Mirasvit\SearchAutocomplete\Block\Injection $block */
+    $paginationEnabled = $block->getPaginationPosition();
+    if ($paginationEnabled == 'disable') {
+        return '';
+    }
+?>
+<div class="mstInPage__pagination" data-bind="foreach: { data: pages, as: 'page' }">
+    <div class="mstInPage__page" data-bind="{click: page.select, text: page.label, css: {current: page.isActive }, attr:{data_page: page.label}}">
+    </div>
+</div>

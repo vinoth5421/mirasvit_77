@@ -1,0 +1,57 @@
+<?php
+
+use Mirasvit\Core\Service\SerializeService;
+
+/** @var \Mirasvit\Core\Ui\QuickDataBar\MultiRowDataBlock $block */
+
+$scope = hash('sha256', $block->getNameInLayout());
+?>
+
+<div data-bind="scope: '<?= $scope ?>'">
+    <div class="mst-quickDataBar__dataBlock _multiRowData" data-bind="css: { _loading: loading() }">
+        <?php if ($block->getLabel()): ?>
+            <div class="dataBlockLabel"><?= $block->getLabel() ?></div>
+        <?php endif; ?>
+
+        <!-- ko foreach: { data: data().rows, as: 'row' } -->
+        <div class="dataBlockRows">
+            <!-- ko foreach: row -->
+            <div class="dataBlockRow" data-bind="scope: 'quickBarFilter<?= $scope ?>', attr: { title: label }, style: { width: $parents[1].percent($parent.data, value) + '%' }">
+                <a href="#" data-bind="click: handleClick.bind($parent.$data, $parent.filter, $parents[1].provider, $parents[1].filter, $parents[1].conditions)">
+                    <div class="valueLabel" data-bind="text: $parent.label"></div>
+                    <div class="dataBlockRowCell color">
+                        <div data-bind="attr: {class: $parent.cellClass}"></div>
+                        <!-- ko if: $parent.isLink -->
+                        <div class="value" data-bind="html:$parent.value"></div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: $parent.isLink -->
+                        <span class="value" data-bind="html: $parent.value"></span>
+                        <!-- /ko -->
+                    </div>
+                </a>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<script type="text/x-magento-init"><?= SerializeService::encode([
+        '*' => [
+            'Magento_Ui/js/core/app' => [
+                'components' => [
+                    $scope                    => [
+                        'component' => 'Mirasvit_Core/js/quickDataBar/dataBlock',
+                        'block'     => get_class($block),
+                        'updateURL' => $this->getUrl('mstcore/quickdatabar/load'),
+                    ],
+                    'quickBarFilter' . $scope => [
+                        'component' => 'Mirasvit_Core/js/quickDataBar/applyFilter',
+                    ],
+                ],
+            ],
+        ],
+    ]) ?>
+
+
+</script>
